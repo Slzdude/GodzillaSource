@@ -1,6 +1,5 @@
 package core.ui;
 
-import core.ApplicationConfig;
 import core.ApplicationContext;
 import core.Db;
 import core.ui.component.DataView;
@@ -15,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 public class MainActivity {
@@ -33,11 +31,6 @@ public class MainActivity {
 
     public MainActivity() {
         ApplicationContext.init();
-        if (functions.toBoolean(Db.getSetingValue("AppIsTip"))) {
-            ApplicationConfig.invoke();
-            JOptionPane.showMessageDialog(getFrame(), "1.程序仅限服务器管理，切勿用于非法用途，非法使用造成的一切后果由自己承担，与本作者无关\n2.由于用户滥用造成的一切后果与作者无关。\n3.用户请自觉遵守当地法律法规，出现一切后果本项目作者概不负责\n4.本软件不得用于商业用途，仅做学习交流", "如果您使用本软件默认同意以下协议条款.如果您不同意本协议的条款 ,否则请立即关闭并删除本软件.", 2);
-        }
-
         this.initVariable();
     }
 
