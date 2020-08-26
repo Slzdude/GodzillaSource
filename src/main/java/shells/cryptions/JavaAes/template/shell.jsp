@@ -1,1 +1,9 @@
-<%!{globalCode}%><%{code}%>
+<%!
+    {
+        globalCode
+    }
+%><%
+    {
+        code
+    }
+%>

