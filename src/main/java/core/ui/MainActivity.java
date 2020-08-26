@@ -8,7 +8,6 @@ import core.ui.component.dialog.GenerateShellLoder;
 import core.ui.component.dialog.PluginManage;
 import core.ui.component.dialog.ShellSetting;
 import util.automaticBindClick;
-import util.functions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +26,7 @@ public class MainActivity {
     private DataView shellView;
     private JScrollPane shellViewScrollPane;
     private JPopupMenu shellViewPopupMenu;
-    private Vector columnVector;
+    private Vector<String> columnVector;
 
     public MainActivity() {
         ApplicationContext.init();
@@ -47,8 +46,8 @@ public class MainActivity {
         this.frame = new JFrame();
         this.frame.setTitle(String.format("哥斯拉\t V%s    by: BeichenDream", "1.00"));
         this.frame.setLayout(new BorderLayout(1, 1));
-        Vector rows = Db.getAllShell();
-        this.columnVector = (Vector) rows.get(0);
+        Vector<Vector<String>> rows = Db.getAllShell();
+        this.columnVector = rows.get(0);
         rows.remove(0);
         this.shellView = new DataView(null, this.columnVector, -1, -1);
         this.shellView.AddRows(rows);
@@ -100,23 +99,10 @@ public class MainActivity {
         this.shellViewPopupMenu.add(refreshShell);
         this.shellView.setRightClickMenu(this.shellViewPopupMenu);
         automaticBindClick.bindMenuItemClick(this.shellViewPopupMenu, null, this);
-        this.addEasterEgg();
         this.frame.setSize(1500, 600);
         this.frame.setLocationRelativeTo(null);
         this.frame.setVisible(true);
-        this.frame.setDefaultCloseOperation(3);
-    }
-
-    private void addEasterEgg() {
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
-            if (e.getKeyCode() == 112 && ApplicationContext.easterEgg) {
-                ApplicationContext.easterEgg = false;
-                JOptionPane.showMessageDialog(MainActivity.getFrame(), "Hacker技术学的再好, 却无法入侵你的心,\n服务器入侵的再多,对你只有Guest,\n是我的DDOS造成了你的拒绝服务？\n还是我的WebShell再次被你查杀？\n你总有防火墙\n我始终停不掉\n想提权\n无奈JSP+MYSQL成为我们的障碍\n找不到你的注入点\n扫不出你的空口令\n所有对我的回应都用3DES加密\n你总是自定义文件格式\n我永远找不到你的入口点\n忽略所有异常\n却还是跟踪不到你的注册码\n是你太过完美,还是我太菜?\n虽然我们是不同的对象,都有隐私的一面,\n但我相信总有一天我会找到你的接口,把我的最真给你看!\n因为我是你的指针,在茫茫内存的堆栈中, 永远指向你那片天空,不孜不倦!\n我愿做你的内联,供你无限次的调用,直到海枯石烂!\n我愿做你的引用,和你同进退共生死,一起经受考验!\n只是我不愿苦苦地调试你的心情,最终沦为你的友元!\n如今我们已被MFC封装--事事变迁!\n如今我们已向COM走去--可想当年!\n没任何奢求,只愿做你最后的System!\n渗透玩的再强,我也不能提权进你的心\n免杀玩的再狠,我也过不了你的主防御\n外挂写的再叼,我也不能操控你对我的爱\n编程玩的再好,我也不能写出完美的爱情\n纵使我多么的不可一世,也不是你的System\n提权了再多的服务器，却永远成不了你的Root\n**But...... **\n那怕你的心再强大，我有0day在手\n主动防御再牛，我有R0\n击败你只是时间问题, 就算能操控，你的心早已经不属于我\n已被千人DownLoad\n完美的爱情写出来能怎样，终究会像游戏一样结束\n不是你的System也罢，但我有Guest用户，早晚提权进入你的管理员组\n\n也许，像你说的那样，我们是不同世界的人，因为我是乞丐而不是骑士\n人变了，是因为心跟着生活在变\n人生有梦，各自精彩\n燕雀安知鸿鹄之志!", "提示", -1);
-                return true;
-            } else {
-                return false;
-            }
-        });
+        this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void addShellMenuItemClick(ActionEvent e) {
@@ -137,7 +123,7 @@ public class MainActivity {
     }
 
     private void aboutMenuItemClick(ActionEvent e) {
-        JOptionPane.showMessageDialog(getFrame(), "由BeichenDream强力驱动\n邮箱:beichendream@gmail.com", "About", -1);
+        JOptionPane.showMessageDialog(getFrame(), "由BeichenDream强力驱动\n邮箱:beichendream@gmail.com", "About", JOptionPane.PLAIN_MESSAGE);
         // functions.openBrowseUrl("https://github.com/BeichenDream/Godzilla");
     }
 
@@ -148,12 +134,12 @@ public class MainActivity {
             if (o != null) {
                 String value = (String) o;
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(value), null);
-                JOptionPane.showMessageDialog(this.shellView, "复制成功", "提示", 1);
+                JOptionPane.showMessageDialog(this.shellView, "复制成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this.shellView, "选中列是空的", "提示", 2);
+                JOptionPane.showMessageDialog(this.shellView, "选中列是空的", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this.shellView, "未选中列", "提示", 2);
+            JOptionPane.showMessageDialog(this.shellView, "未选中列", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -163,10 +149,10 @@ public class MainActivity {
         if (o != null && o.getClass().isAssignableFrom(String.class)) {
             String shellId = (String) o;
             if (Db.removeShell(shellId) > 0) {
-                JOptionPane.showMessageDialog(this.shellView, "删除成功", "提示", 1);
+                JOptionPane.showMessageDialog(this.shellView, "删除成功", "提示", JOptionPane.INFORMATION_MESSAGE);
                 this.refreshShellView();
             } else {
-                JOptionPane.showMessageDialog(this.shellView, "删除失败", "提示", 2);
+                JOptionPane.showMessageDialog(this.shellView, "删除失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         }
 

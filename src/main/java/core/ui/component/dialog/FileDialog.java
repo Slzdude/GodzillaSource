@@ -74,7 +74,7 @@ public class FileDialog extends JDialog {
         this.destFileTextField.setText(destString);
         this.setSize(650, 180);
         this.setLocationRelativeTo(frame);
-        this.setDefaultCloseOperation(2);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -105,7 +105,7 @@ public class FileDialog extends JDialog {
 
     private void srcSelectdFileButtonClick(ActionEvent actionEvent) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         if (selectdFile != null) {
@@ -117,7 +117,7 @@ public class FileDialog extends JDialog {
 
     private void destSelectdFileButtonClick(ActionEvent actionEvent) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         if (selectdFile != null) {

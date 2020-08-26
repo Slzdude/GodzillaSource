@@ -34,7 +34,7 @@ public class PluginManage extends JDialog {
         bottomPanel.add(this.removeButton);
         bottomPanel.add(this.refreshButton);
         bottomPanel.add(this.cancelButton);
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setTopComponent(new JScrollPane(this.pluginView));
         this.splitPane.setBottomComponent(bottomPanel);
         this.splitPane.addComponentListener(new ComponentAdapter() {
@@ -46,7 +46,7 @@ public class PluginManage extends JDialog {
         this.add(this.splitPane);
         this.setSize(420, 420);
         this.setLocationRelativeTo(MainActivity.getFrame());
-        this.setDefaultCloseOperation(2);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -67,15 +67,15 @@ public class PluginManage extends JDialog {
     private void addPluginButtonClick(ActionEvent actionEvent) {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         if (selectdFile != null) {
             if (Db.addPlugin(selectdFile.getAbsolutePath()) == 1) {
                 ApplicationContext.init();
-                JOptionPane.showMessageDialog(this, "添加插件成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "添加插件成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "添加插件失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "添加插件失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             Log.log("用户取消选择.....");
@@ -89,12 +89,12 @@ public class PluginManage extends JDialog {
         if (rowIndex != -1) {
             Object selectedItem = this.pluginView.getValueAt(rowIndex, 0);
             if (Db.removePlugin((String) selectedItem) == 1) {
-                JOptionPane.showMessageDialog(this, "移除插件成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "移除插件成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "移除插件失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "移除插件失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "没有选中插件", "提示", 2);
+            JOptionPane.showMessageDialog(this, "没有选中插件", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
         this.refreshPluginView();

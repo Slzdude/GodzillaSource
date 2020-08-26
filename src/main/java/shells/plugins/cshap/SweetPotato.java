@@ -39,7 +39,7 @@ public class SweetPotato implements Plugin {
     private Encoding encoding;
 
     public SweetPotato() {
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setDividerSize(0);
         JPanel topPanel = new JPanel();
         topPanel.add(this.loadButton);
@@ -68,16 +68,16 @@ public class SweetPotato implements Plugin {
                 inputStream.close();
                 if (this.payload.include("SweetPotato.Run", data)) {
                     this.loadState = true;
-                    JOptionPane.showMessageDialog(this.panel, "Load success", "提示", 1);
+                    JOptionPane.showMessageDialog(this.panel, "Load success", "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this.panel, "Load fail", "提示", 2);
+                    JOptionPane.showMessageDialog(this.panel, "Load fail", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception var4) {
                 Log.error(var4);
-                JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", 2);
+                JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

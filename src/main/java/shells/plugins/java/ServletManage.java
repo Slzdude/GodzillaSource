@@ -32,7 +32,7 @@ public class ServletManage implements Plugin {
     private ShellEntity shellEntity;
 
     public ServletManage() {
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setDividerSize(0);
         JPanel topPanel = new JPanel();
         topPanel.add(this.getAllServletButton);
@@ -58,7 +58,7 @@ public class ServletManage implements Plugin {
         if (unServlet.state) {
             String resultString = unLoadServlet(unServlet.wrapperName, unServlet.urlPattern);
             Log.log(resultString);
-            JOptionPane.showMessageDialog(this.panel, resultString, "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         Log.log("用户取消选择.....");
@@ -183,7 +183,7 @@ public class ServletManage implements Plugin {
             this.urlPatternTextField.setText(urlPatternString);
             setSize(650, 180);
             setLocationRelativeTo(frame);
-            setDefaultCloseOperation(2);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             setVisible(true);
         }
 

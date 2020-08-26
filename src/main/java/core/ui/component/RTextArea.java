@@ -35,9 +35,9 @@ public class RTextArea extends JTextArea implements MouseListener {
         String selectString = this.getSelectedText();
         if (selectString != null && selectString.trim().length() > 0) {
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(selectString), null);
-            JOptionPane.showMessageDialog(this, "复制成功", "提示", 1);
+            JOptionPane.showMessageDialog(this, "复制成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "选中文本是空的", "提示", 2);
+            JOptionPane.showMessageDialog(this, "选中文本是空的", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

@@ -47,7 +47,7 @@ public class RealCmd implements Plugin {
     private Encoding encoding;
 
     public RealCmd() {
-        this.meterpreterSplitPane.setOrientation(0);
+        this.meterpreterSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.meterpreterSplitPane.setDividerSize(0);
         JPanel meterpreterTopPanel = new JPanel();
         meterpreterTopPanel.add(this.pollingSleepLabel);
@@ -77,7 +77,7 @@ public class RealCmd implements Plugin {
             serverSocket.close();
         } catch (Exception var5) {
             Log.error(var5);
-            JOptionPane.showMessageDialog(this.getView(), var5.getMessage(), "提示", 2);
+            JOptionPane.showMessageDialog(this.getView(), var5.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -88,9 +88,9 @@ public class RealCmd implements Plugin {
         reqParameter.add("action", "stop");
         byte[] result = this.payload.evalFunc("RevlCmd.Run", "xxx", reqParameter);
         if (result.length != 1 || result[0] != 255 && result[0] != -1) {
-            JOptionPane.showMessageDialog(this.getView(), "fail", "提示", 2);
+            JOptionPane.showMessageDialog(this.getView(), "fail", "提示", JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this.getView(), "stop ok", "提示", 1);
+            JOptionPane.showMessageDialog(this.getView(), "stop ok", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

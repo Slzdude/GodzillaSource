@@ -48,7 +48,7 @@ public class ShellRSFilePanel extends JPanel {
         this.topPanel.add(this.saveButton);
         this.topPanel.add(this.refreshButton);
         this.topPanel.add(this.backButton);
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setTopComponent(this.topPanel);
         this.splitPane.setBottomComponent(this.scrollPane);
         this.encodingComboBox.addActionListener(paramActionEvent -> {
@@ -83,9 +83,9 @@ public class ShellRSFilePanel extends JPanel {
         String fileString = this.readFileTextField.getText();
         boolean uploadState = this.payload.uploadFile(fileString, functions.stringToByteArray(this.fileDataTextArea.getText(), this.encodingTypeString));
         if (uploadState) {
-            JOptionPane.showMessageDialog(this, "保存成功", "提示", 1);
+            JOptionPane.showMessageDialog(this, "保存成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "保存失败", "提示", 2);
+            JOptionPane.showMessageDialog(this, "保存失败", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

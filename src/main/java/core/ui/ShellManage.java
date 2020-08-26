@@ -55,7 +55,7 @@ public class ShellManage extends JFrame {
             this.init();
         } else {
             this.setTitle("初始化失败");
-            JOptionPane.showMessageDialog(this, "初始化失败", "提示", 2);
+            JOptionPane.showMessageDialog(this, "初始化失败", "提示", JOptionPane.WARNING_MESSAGE);
             this.dispose();
         }
 
@@ -89,7 +89,7 @@ public class ShellManage extends JFrame {
         this.setSize(1300, 600);
         this.setLocationRelativeTo(MainActivity.getFrame());
         this.setVisible(true);
-        this.setDefaultCloseOperation(2);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private String getPluginName(Plugin p) {

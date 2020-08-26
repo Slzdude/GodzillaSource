@@ -135,8 +135,8 @@ public class ShellSetting extends JDialog {
         this.leftTextArea.setBorder(new TitledBorder("leftData"));
         JSplitPane reqSplitPane = new JSplitPane();
         JSplitPane lrSplitPane = new JSplitPane();
-        lrSplitPane.setOrientation(0);
-        reqSplitPane.setOrientation(0);
+        lrSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        reqSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         lrSplitPane.setTopComponent(new JScrollPane(this.leftTextArea));
         lrSplitPane.setBottomComponent(new JScrollPane(this.rightTextArea));
         reqSplitPane.setTopComponent(new JScrollPane(this.headersTextArea));
@@ -160,7 +160,7 @@ public class ShellSetting extends JDialog {
         automaticBindClick.bindJButtonClick(this, this);
         setSize(490, 520);
         setLocationRelativeTo(MainActivity.getFrame());
-        setDefaultCloseOperation(2);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
@@ -273,33 +273,33 @@ public class ShellSetting extends JDialog {
 
     private void testButtonClick(ActionEvent actionEvent) {
         if (!updateTempShellEntity()) {
-            JOptionPane.showMessageDialog(this, this.error, "提示", 2);
+            JOptionPane.showMessageDialog(this, this.error, "提示", JOptionPane.WARNING_MESSAGE);
             this.error = null;
         } else if (!this.shellContext.initShellOpertion()) {
-            JOptionPane.showMessageDialog(this, "initShellOpertion Fail", "提示", 2);
+            JOptionPane.showMessageDialog(this, "initShellOpertion Fail", "提示", JOptionPane.WARNING_MESSAGE);
         } else if (this.shellContext.getPayloadModel().test()) {
-            JOptionPane.showMessageDialog(this, "Success!", "提示", 1);
+            JOptionPane.showMessageDialog(this, "Success!", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Payload Test Fail", "提示", 2);
+            JOptionPane.showMessageDialog(this, "Payload Test Fail", "提示", JOptionPane.WARNING_MESSAGE);
         }
     }
 
     private void setButtonClick(ActionEvent actionEvent) {
         if (!updateTempShellEntity()) {
-            JOptionPane.showMessageDialog(this, this.error, "提示", 2);
+            JOptionPane.showMessageDialog(this, this.error, "提示", JOptionPane.WARNING_MESSAGE);
             this.error = null;
         } else if (this.shellId == null || this.shellId.trim().length() <= 0) {
             if (Db.addShell(this.shellContext) > 0) {
-                JOptionPane.showMessageDialog(this, "添加成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "添加成功", "提示", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 return;
             }
-            JOptionPane.showMessageDialog(this, "添加失败", "提示", 2);
+            JOptionPane.showMessageDialog(this, "添加失败", "提示", JOptionPane.WARNING_MESSAGE);
         } else if (Db.updateShell(this.shellContext) > 0) {
-            JOptionPane.showMessageDialog(this, "修改成功", "提示", 1);
+            JOptionPane.showMessageDialog(this, "修改成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "修改失败", "提示", 2);
+            JOptionPane.showMessageDialog(this, "修改失败", "提示", JOptionPane.WARNING_MESSAGE);
         }
     }
 

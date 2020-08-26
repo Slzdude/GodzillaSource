@@ -81,7 +81,7 @@ public class DatabaseSetting extends JDialog {
         automaticBindClick.bindJButtonClick(this, this);
         this.setSize(460, 270);
         this.setLocationRelativeTo(shellEntity.getFrame());
-        this.setDefaultCloseOperation(2);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -94,12 +94,12 @@ public class DatabaseSetting extends JDialog {
                 this.dbInfo.setDbUserName(this.dbUserNameTextField.getText());
                 this.dbInfo.setDbPassword(this.dbPasswordTextField.getText());
                 this.dbInfo.setDbType(dbType);
-                JOptionPane.showMessageDialog(this, "success", "提示", 1);
+                JOptionPane.showMessageDialog(this, "success", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "no selected DbType", "提示", 2);
+                JOptionPane.showMessageDialog(this, "no selected DbType", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception var3) {
-            JOptionPane.showMessageDialog(this, var3.getMessage(), "提示", 2);
+            JOptionPane.showMessageDialog(this, var3.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
             Log.error(var3);
         }
 

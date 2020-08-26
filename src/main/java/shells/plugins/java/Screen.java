@@ -33,7 +33,7 @@ public class Screen implements Plugin {
     private Encoding encoding;
 
     public Screen() {
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setDividerSize(0);
         JPanel topPanel = new JPanel();
         topPanel.add(this.runButton);
@@ -57,14 +57,14 @@ public class Screen implements Plugin {
             }
 
             JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(0);
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             chooser.showDialog(new JLabel(), "选择");
             File selectdFile = chooser.getSelectedFile();
             if (selectdFile != null) {
                 FileOutputStream fileOutputStream = new FileOutputStream(selectdFile);
                 fileOutputStream.write(result);
                 fileOutputStream.close();
-                JOptionPane.showMessageDialog(this.panel, String.format("save screen to -> %s", selectdFile.getAbsolutePath()), "提示", 1);
+                JOptionPane.showMessageDialog(this.panel, String.format("save screen to -> %s", selectdFile.getAbsolutePath()), "提示", JOptionPane.INFORMATION_MESSAGE);
             }
 
             this.label.setIcon(new ImageIcon(ImageIO.read(new ByteArrayInputStream(result))));

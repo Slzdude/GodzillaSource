@@ -29,7 +29,7 @@ public class DataView extends JTable {
     private void initJtableConfig() {
         this.rightClickEvent = new RightClickEvent(this.rightClickMenu, this);
         this.addMouseListener(this.rightClickEvent);
-        this.setSelectionMode(0);
+        this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setAutoCreateRowSorter(true);
         this.setRowHeight(25);
     }
@@ -223,13 +223,13 @@ public class DataView extends JTable {
         JTableHeader tableHeader = super.getTableHeader();
         tableHeader.setReorderingAllowed(false);
         DefaultTableCellRenderer hr = (DefaultTableCellRenderer) tableHeader.getDefaultRenderer();
-        hr.setHorizontalAlignment(0);
+        hr.setHorizontalAlignment(SwingConstants.CENTER);
         return tableHeader;
     }
 
     public TableCellRenderer getDefaultRenderer(Class columnClass) {
         DefaultTableCellRenderer cr = (DefaultTableCellRenderer) super.getDefaultRenderer(columnClass);
-        cr.setHorizontalAlignment(0);
+        cr.setHorizontalAlignment(SwingConstants.CENTER);
         return cr;
     }
 

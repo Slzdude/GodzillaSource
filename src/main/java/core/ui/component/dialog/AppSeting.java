@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 public class AppSeting extends JDialog {
@@ -77,7 +78,7 @@ public class AppSeting extends JDialog {
 
         for (int var3 = 0; var3 < var4; ++var3) {
             Field field = var5[var3];
-            if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == 25) {
+            if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == (Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL)) {
                 arrayList.add(field.getName());
             }
         }
@@ -151,7 +152,7 @@ public class AppSeting extends JDialog {
         Dimension dimension = new Dimension();
         dimension.height = 30;
         JSplitPane splitPane = new JSplitPane();
-        splitPane.setOrientation(0);
+        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         JPanel bottomPanel = new JPanel();
         splitPane.setTopComponent(new JScrollPane(this.headerTextArea));
         bottomPanel.add(this.updateHeaderButton);
@@ -178,17 +179,17 @@ public class AppSeting extends JDialog {
         this.coreConfigPanel.add(this.isTipCheckBox, gbcIsTip);
         this.isTipCheckBox.addActionListener(e -> {
             if (Db.updateSetingKV("AppIsTip", Boolean.toString(AppSeting.this.isTipCheckBox.isSelected()))) {
-                JOptionPane.showMessageDialog(null, "修改成功!", "提示", 1);
+                JOptionPane.showMessageDialog(null, "修改成功!", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "修改失败!", "提示", 2);
+                JOptionPane.showMessageDialog(null, "修改失败!", "提示", JOptionPane.WARNING_MESSAGE);
             }
 
         });
         this.godModeCheckBox.addActionListener(e -> {
             if (ApplicationContext.setGodMode(AppSeting.this.godModeCheckBox.isSelected())) {
-                JOptionPane.showMessageDialog(null, "修改成功!", "提示", 1);
+                JOptionPane.showMessageDialog(null, "修改成功!", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "修改失败!", "提示", 2);
+                JOptionPane.showMessageDialog(null, "修改失败!", "提示", JOptionPane.WARNING_MESSAGE);
             }
 
         });
@@ -215,7 +216,7 @@ public class AppSeting extends JDialog {
 
             for (int var4 = 0; var4 < var5; ++var4) {
                 Field field = var6[var4];
-                if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == 25 && field.getInt(null) == type) {
+                if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == (Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL) && field.getInt(null) == type) {
                     return field.getName();
                 }
             }
@@ -229,20 +230,20 @@ public class AppSeting extends JDialog {
 
     private void updateFontButtonClick(ActionEvent actionEvent) {
         ApplicationContext.setFont(this.getSelectFont());
-        JOptionPane.showMessageDialog(this, "修改成功! 重启程序生效!", "提示", 1);
+        JOptionPane.showMessageDialog(this, "修改成功! 重启程序生效!", "提示", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void resetFontButtonClick(ActionEvent actionEvent) {
         ApplicationContext.resetFont();
-        JOptionPane.showMessageDialog(this, "重置成功! 重启程序生效!", "提示", 1);
+        JOptionPane.showMessageDialog(this, "重置成功! 重启程序生效!", "提示", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void updateHeaderButtonClick(ActionEvent actionEvent) {
         String header = this.headerTextArea.getText();
         if (ApplicationContext.updateGloballHttpHeader(header)) {
-            JOptionPane.showMessageDialog(this, "修改成功!", "提示", 1);
+            JOptionPane.showMessageDialog(this, "修改成功!", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "修改失败!", "提示", 2);
+            JOptionPane.showMessageDialog(this, "修改失败!", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

@@ -73,7 +73,7 @@ public class GenerateShellLoder extends JDialog {
         functions.fireActionEventByJComboBox(this.payloadComboBox);
         this.setSize(430, 230);
         this.setLocationRelativeTo(MainActivity.getFrame());
-        this.setDefaultCloseOperation(2);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -88,7 +88,7 @@ public class GenerateShellLoder extends JDialog {
                 byte[] data = cryption.generate(password, secretKey);
                 if (data != null) {
                     JFileChooser chooser = new JFileChooser();
-                    chooser.setFileSelectionMode(0);
+                    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                     chooser.showDialog(new JLabel(), "选择");
                     File selectdFile = chooser.getSelectedFile();
                     if (selectdFile != null) {
@@ -96,7 +96,7 @@ public class GenerateShellLoder extends JDialog {
                             FileOutputStream fileOutputStream = new FileOutputStream(selectdFile);
                             fileOutputStream.write(data);
                             fileOutputStream.close();
-                            JOptionPane.showMessageDialog(this, "success! save file to -> " + selectdFile.getAbsolutePath(), "提示", 1);
+                            JOptionPane.showMessageDialog(this, "success! save file to -> " + selectdFile.getAbsolutePath(), "提示", JOptionPane.INFORMATION_MESSAGE);
                             this.dispose();
                         } catch (Exception var11) {
                             Log.error(var11);
@@ -105,13 +105,13 @@ public class GenerateShellLoder extends JDialog {
                         Log.log("用户取消选择....");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "加密器在生成时返回空", "提示", 2);
+                    JOptionPane.showMessageDialog(this, "加密器在生成时返回空", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "payload 或  cryption 没有选中!", "提示", 2);
+                JOptionPane.showMessageDialog(this, "payload 或  cryption 没有选中!", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "password 或\t secretKey  是空的!", "提示", 2);
+            JOptionPane.showMessageDialog(this, "password 或\t secretKey  是空的!", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

@@ -37,7 +37,7 @@ public class Meterpreter implements Plugin {
     private Encoding encoding;
 
     public Meterpreter() {
-        this.meterpreterSplitPane.setOrientation(0);
+        this.meterpreterSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.meterpreterSplitPane.setDividerSize(0);
         JPanel meterpreterTopPanel = new JPanel();
         meterpreterTopPanel.add(this.hostLabel);
@@ -60,16 +60,16 @@ public class Meterpreter implements Plugin {
                 inputStream.close();
                 if (this.payload.include("plugin.Meterpreter", data)) {
                     this.loadState = true;
-                    JOptionPane.showMessageDialog(this.panel, "Load success", "提示", 1);
+                    JOptionPane.showMessageDialog(this.panel, "Load success", "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this.panel, "Load fail", "提示", 2);
+                    JOptionPane.showMessageDialog(this.panel, "Load fail", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception var4) {
                 Log.error(var4);
-                JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", 2);
+                JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -83,7 +83,7 @@ public class Meterpreter implements Plugin {
         byte[] result = this.payload.evalFunc("plugin.Meterpreter", "run", reqParamete);
         String resultString = this.encoding.Decoding(result);
         Log.log(resultString);
-        JOptionPane.showMessageDialog(this.panel, resultString, "提示", 1);
+        JOptionPane.showMessageDialog(this.panel, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void init(ShellEntity shellEntity) {

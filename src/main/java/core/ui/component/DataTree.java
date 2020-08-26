@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class DataTree extends JTree {
     private void initJTree() {
         this.rightClickEvent = new RightClickEvent(this);
         this.addMouseListener(this.rightClickEvent);
-        this.getSelectionModel().setSelectionMode(1);
+        this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
 
     public void setActionDbclick(ActionDblClick actionDblClick) {

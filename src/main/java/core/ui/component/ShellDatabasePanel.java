@@ -56,7 +56,7 @@ public class ShellDatabasePanel extends JPanel {
         this.dbInfo = new DbInfo();
         this.splitPane = new JSplitPane();
         this.databaseTreeNode = new DefaultMutableTreeNode("Database");
-        this.splitPane.setOrientation(0);
+        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.statusLabel = new JLabel("state");
         this.execTypeLabel = new JLabel("Exec Type");
         this.sql_listLabel = new JLabel("SQL Statement");
@@ -69,7 +69,7 @@ public class ShellDatabasePanel extends JPanel {
         this.dataView = new DataView(null, null, -1, -1);
         this.datalistpane = new JScrollPane(this.dataView);
         this.dataView.setAutoCreateRowSorter(true);
-        this.dataView.setAutoResizeMode(0);
+        this.dataView.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.datalistpane.setPreferredSize(new Dimension(0, 0));
         this.sqlCommand = new RTextArea();
         this.commandpane = new JScrollPane(this.sqlCommand);
@@ -196,7 +196,7 @@ public class ShellDatabasePanel extends JPanel {
             String result = this.payload.execSql(this.dbInfo.getDbType(), this.dbInfo.getDbHost(), this.dbInfo.getDbPort(), this.dbInfo.getDbUserName(), this.dbInfo.getDbPassword(), execType, execSql);
             this.showData(result);
         } else {
-            JOptionPane.showMessageDialog(this, "SQL语句是空的", "提示", 2);
+            JOptionPane.showMessageDialog(this, "SQL语句是空的", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -230,7 +230,7 @@ public class ShellDatabasePanel extends JPanel {
                     this.showData(rowsVector);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, data, "提示", 2);
+                JOptionPane.showMessageDialog(this, data, "提示", JOptionPane.WARNING_MESSAGE);
                 Log.error(data);
             }
         } else {
@@ -261,12 +261,12 @@ public class ShellDatabasePanel extends JPanel {
             if (o != null) {
                 String value = (String) o;
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(value), null);
-                JOptionPane.showMessageDialog(this, "复制成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "复制成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "选中列是空的", "提示", 2);
+                JOptionPane.showMessageDialog(this, "选中列是空的", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "未选中列", "提示", 2);
+            JOptionPane.showMessageDialog(this, "未选中列", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -279,12 +279,12 @@ public class ShellDatabasePanel extends JPanel {
                 String value = Arrays.toString(o);
                 this.dataView.GetSelectRow1();
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(value), null);
-                JOptionPane.showMessageDialog(this, "复制成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "复制成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "选中列是空的", "提示", 2);
+                JOptionPane.showMessageDialog(this, "选中列是空的", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "未选中列", "提示", 2);
+            JOptionPane.showMessageDialog(this, "未选中列", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -307,7 +307,7 @@ public class ShellDatabasePanel extends JPanel {
 
     private void exportDataMenuItemClick(ActionEvent e) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setFileFilter(new FileNameExtensionFilter("*.csv", "csv"));
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
@@ -318,9 +318,9 @@ public class ShellDatabasePanel extends JPanel {
             }
 
             if (functions.saveDataViewToCsv(this.dataView.getColumnVector(), this.dataView.getModel().getDataVector(), fileString)) {
-                JOptionPane.showMessageDialog(this, "导出成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "导出成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "导出失败", "提示", 1);
+                JOptionPane.showMessageDialog(this, "导出失败", "提示", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             Log.log("用户取消选择......");

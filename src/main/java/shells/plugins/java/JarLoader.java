@@ -42,7 +42,7 @@ public class JarLoader implements Plugin {
     public JarLoader() {
         this.jarComboBox = new JComboBox<>(DB_JARS);
         this.meterpreterSplitPane = new JSplitPane();
-        this.meterpreterSplitPane.setOrientation(0);
+        this.meterpreterSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.meterpreterSplitPane.setDividerSize(0);
         JPanel TopPanel = new JPanel();
         TopPanel.add(this.jarFileLabel);
@@ -62,7 +62,7 @@ public class JarLoader implements Plugin {
     private void selectJarButtonClick(ActionEvent actionEvent) {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         if (selectdFile != null) {
@@ -79,10 +79,10 @@ public class JarLoader implements Plugin {
             InputStream inputStream = new FileInputStream(jarFile);
             byte[] jarByteArray = functions.readInputStream(inputStream);
             inputStream.close();
-            JOptionPane.showMessageDialog(this.panel, this.loadJar(jarByteArray), "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, this.loadJar(jarByteArray), "提示", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception var5) {
             Log.error(var5);
-            JOptionPane.showMessageDialog(this.panel, var5.getMessage(), "提示", 2);
+            JOptionPane.showMessageDialog(this.panel, var5.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -92,10 +92,10 @@ public class JarLoader implements Plugin {
             InputStream inputStream = this.getClass().getResourceAsStream(String.format("assets/%s.jar", this.jarComboBox.getSelectedItem()));
             byte[] jarByteArray = functions.readInputStream(inputStream);
             inputStream.close();
-            JOptionPane.showMessageDialog(this.panel, this.loadJar(jarByteArray), "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, this.loadJar(jarByteArray), "提示", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception var4) {
             Log.error(var4);
-            JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", 2);
+            JOptionPane.showMessageDialog(this.panel, var4.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

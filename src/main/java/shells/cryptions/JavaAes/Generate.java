@@ -24,7 +24,7 @@ class Generate {
             inputStream = Generate.class.getResourceAsStream("template/" + (isBin ? "raw" : "base64") + "Code.bin");
             String code = new String(functions.readInputStream(inputStream));
             inputStream.close();
-            Object selectedValue = JOptionPane.showInputDialog(null, "suffix", "selected suffix", 1, null, SUFFIX, null);
+            Object selectedValue = JOptionPane.showInputDialog(null, "suffix", "selected suffix", JOptionPane.INFORMATION_MESSAGE, null, SUFFIX, null);
             if (selectedValue != null) {
                 String suffix = (String) selectedValue;
                 inputStream = Generate.class.getResourceAsStream("template/shell." + suffix);

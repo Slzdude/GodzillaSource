@@ -81,9 +81,9 @@ public class PZip implements Plugin {
             reqParameter.add("compressFile", this.compressDestFileTextField.getText().trim());
             reqParameter.add("compressDir", this.compressSrcDirTextField.getText().trim());
             String resultString = this.encoding.Decoding(this.payload.evalFunc("PZip", "zip", reqParameter));
-            JOptionPane.showMessageDialog(null, resultString, "提示", 1);
+            JOptionPane.showMessageDialog(null, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "请检查是否填写完整", "提示", 1);
+            JOptionPane.showMessageDialog(null, "请检查是否填写完整", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -95,9 +95,9 @@ public class PZip implements Plugin {
             reqParameter.add("compressFile", this.compressDestFileTextField.getText().trim());
             reqParameter.add("compressDir", this.compressSrcDirTextField.getText().trim());
             String resultString = this.encoding.Decoding(this.payload.evalFunc("PZip", "unZip", reqParameter));
-            JOptionPane.showMessageDialog(null, resultString, "提示", 1);
+            JOptionPane.showMessageDialog(null, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "请检查是否填写完整", "提示", 1);
+            JOptionPane.showMessageDialog(null, "请检查是否填写完整", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

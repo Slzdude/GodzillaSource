@@ -138,15 +138,15 @@ public class ShellFileManager extends JPanel {
         this.fileIcon = new ImageIcon(this.getClass().getResource("/images/file.png"));
         this.fileDataTree.setLeafIcon(new ImageIcon(this.getClass().getResource("/images/folder.png")));
         this.jSplitPane2 = new JSplitPane();
-        this.jSplitPane2.setOrientation(0);
+        this.jSplitPane2.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.jSplitPane2.setTopComponent(this.dataViewPanel);
         this.jSplitPane2.setBottomComponent(this.toolSplitPane);
         this.jSplitPane3 = new JSplitPane();
-        this.jSplitPane3.setOrientation(0);
+        this.jSplitPane3.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.jSplitPane3.setTopComponent(this.dirPanel);
         this.jSplitPane3.setBottomComponent(this.jSplitPane2);
         this.jSplitPane1 = new JSplitPane();
-        this.jSplitPane1.setOrientation(1);
+        this.jSplitPane1.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         this.jSplitPane1.setLeftComponent(this.filePanel);
         this.jSplitPane1.setRightComponent(this.jSplitPane3);
         this.add(this.jSplitPane1);
@@ -177,7 +177,7 @@ public class ShellFileManager extends JPanel {
             this.rsFilePanel.rsFile(fileNameString);
             ((CardLayout) this.fileOpertionPanel.getLayout()).show(this.fileOpertionPanel, "rsFile");
         } else {
-            JOptionPane.showMessageDialog(this, "目标文件大小大于1MB", "提示", 2);
+            JOptionPane.showMessageDialog(this, "目标文件大小大于1MB", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -194,12 +194,12 @@ public class ShellFileManager extends JPanel {
             String destFileString = fileOpertionInfo.getDestFileName();
             boolean state = this.payload.moveFile(srcFileString, destFileString);
             if (state) {
-                JOptionPane.showMessageDialog(this, String.format("移动成功  %s >> %s", fileOpertionInfo.getSrcFileName(), fileOpertionInfo.getDestFileName()), "提示", 1);
+                JOptionPane.showMessageDialog(this, String.format("移动成功  %s >> %s", fileOpertionInfo.getSrcFileName(), fileOpertionInfo.getDestFileName()), "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "修改失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "修改失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -210,12 +210,12 @@ public class ShellFileManager extends JPanel {
         if (fileOpertionInfo.getOpertionStatus() && fileOpertionInfo.getSrcFileName().trim().length() > 0 && fileOpertionInfo.getDestFileName().trim().length() > 0) {
             boolean state = this.payload.copyFile(fileOpertionInfo.getSrcFileName(), fileOpertionInfo.getDestFileName());
             if (state) {
-                JOptionPane.showMessageDialog(this, String.format("复制成功  %s <<>> %s", fileOpertionInfo.getSrcFileName(), fileOpertionInfo.getDestFileName()), "提示", 1);
+                JOptionPane.showMessageDialog(this, String.format("复制成功  %s <<>> %s", fileOpertionInfo.getSrcFileName(), fileOpertionInfo.getDestFileName()), "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "复制失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "复制失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -236,9 +236,9 @@ public class ShellFileManager extends JPanel {
         if (inputFile != null) {
             boolean state = this.payload.deleteFile(inputFile);
             if (state) {
-                JOptionPane.showMessageDialog(this, "删除成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "删除成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "删除失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "删除失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             Log.log("用户取消选择.....");
@@ -264,9 +264,9 @@ public class ShellFileManager extends JPanel {
         if (inputFile != null) {
             boolean state = this.payload.newFile(inputFile);
             if (state) {
-                JOptionPane.showMessageDialog(this, "新建文件成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "新建文件成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "新建文件失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "新建文件失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             Log.log("用户取消选择.....");
@@ -302,9 +302,9 @@ public class ShellFileManager extends JPanel {
         if (inputFile != null) {
             boolean state = this.payload.newDir(inputFile);
             if (state) {
-                JOptionPane.showMessageDialog(this, "新建文件夹成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "新建文件夹成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "新建文件夹失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "新建文件夹失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             Log.log("用户取消选择.....");
@@ -371,30 +371,30 @@ public class ShellFileManager extends JPanel {
                     fileInputStream.close();
                 } catch (FileNotFoundException var4) {
                     Log.error(var4);
-                    JOptionPane.showMessageDialog(this, "文件不存在", "提示", 2);
+                    JOptionPane.showMessageDialog(this, "文件不存在", "提示", JOptionPane.WARNING_MESSAGE);
                 } catch (IOException var5) {
                     Log.error(var5);
-                    JOptionPane.showMessageDialog(this, var5.getMessage(), "提示", 2);
+                    JOptionPane.showMessageDialog(this, var5.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
                 }
 
                 boolean state = this.payload.uploadFile(fileOpertionInfo.getDestFileName(), data);
                 if (state) {
-                    JOptionPane.showMessageDialog(this, "上传成功", "提示", 1);
+                    JOptionPane.showMessageDialog(this, "上传成功", "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "上传失败", "提示", 2);
+                    JOptionPane.showMessageDialog(this, "上传失败", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "上传路径为空", "提示", 2);
+                JOptionPane.showMessageDialog(this, "上传路径为空", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
 
     private void UploadFile() {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         if (selectdFile != null) {
@@ -407,20 +407,20 @@ public class ShellFileManager extends JPanel {
                 fileInputStream.close();
             } catch (FileNotFoundException var6) {
                 Log.error(var6);
-                JOptionPane.showMessageDialog(this, "文件不存在", "提示", 2);
+                JOptionPane.showMessageDialog(this, "文件不存在", "提示", JOptionPane.WARNING_MESSAGE);
             } catch (IOException var7) {
                 Log.error(var7);
-                JOptionPane.showMessageDialog(this, var7.getMessage(), "提示", 2);
+                JOptionPane.showMessageDialog(this, var7.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
             }
 
             boolean state = this.payload.uploadFile(uploadFileString, data);
             if (state) {
-                JOptionPane.showMessageDialog(this, "上传成功", "提示", 1);
+                JOptionPane.showMessageDialog(this, "上传成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "上传失败", "提示", 2);
+                JOptionPane.showMessageDialog(this, "上传失败", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -434,22 +434,22 @@ public class ShellFileManager extends JPanel {
                 data = this.payload.downloadFile(fileOpertionInfo.getSrcFileName());
                 boolean state = functions.filePutContent(fileOpertionInfo.getDestFileName(), data);
                 if (state) {
-                    JOptionPane.showMessageDialog(this, "下载成功", "提示", 1);
+                    JOptionPane.showMessageDialog(this, "下载成功", "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "下载失败", "提示", 2);
+                    JOptionPane.showMessageDialog(this, "下载失败", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "下载路径为空", "提示", 2);
+                JOptionPane.showMessageDialog(this, "下载路径为空", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+            JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
 
     private void downloadFile() {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(0);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.showDialog(new JLabel(), "选择");
         File selectdFile = chooser.getSelectedFile();
         String srcFile = this.getSelectdFile();
@@ -459,15 +459,15 @@ public class ShellFileManager extends JPanel {
                 data = this.payload.downloadFile(srcFile);
                 boolean state = functions.filePutContent(selectdFile, data);
                 if (state) {
-                    JOptionPane.showMessageDialog(this, "下载成功", "提示", 1);
+                    JOptionPane.showMessageDialog(this, "下载成功", "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "下载失败", "提示", 2);
+                    JOptionPane.showMessageDialog(this, "下载失败", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", 2);
+                JOptionPane.showMessageDialog(this, "信息填写不完整", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "未选中下载文件", "提示", 2);
+            JOptionPane.showMessageDialog(this, "未选中下载文件", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

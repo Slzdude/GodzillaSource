@@ -79,7 +79,7 @@ public class ByPassOpenBasedir implements Plugin {
             byte[] result = this.payload.evalFunc("plugin.ByPassOpenBasedir", "run", new ReqParameter());
             String resultString = this.encoding.Decoding(result);
             Log.log(resultString);
-            JOptionPane.showMessageDialog(null, resultString, "提示", 1);
+            JOptionPane.showMessageDialog(null, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Log.error("load ByPassOpenBasedir fail!");
         }

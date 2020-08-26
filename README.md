@@ -12,6 +12,14 @@ JDK1.8 + Gradle
 
 以下介绍直接援引自原作者的README
 
+## 个人修改
+
+- 移除F1键彩蛋
+- 移除初始化时的Tips
+- 移除查看About之后强制弹出项目主页的功能
+
+版权相关信息已全部保留
+
 ## 运行环境
  1. JavaDynamicPayload -> jre5及以上
  2. CShapDynamicPayload -> .net2.0及以上

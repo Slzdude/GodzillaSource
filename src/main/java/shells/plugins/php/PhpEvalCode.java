@@ -40,10 +40,10 @@ public class PhpEvalCode implements Plugin {
         this.codeTextArea.setBorder(new TitledBorder("code"));
         this.resultTextArea.setBorder(new TitledBorder("result"));
         this.codeTextArea.setText("\necho \"hello word!\";\t\t\t\t\t");
-        pane1.setOrientation(1);
+        pane1.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         pane1.setLeftComponent(new JScrollPane(this.codeTextArea));
         pane1.setRightComponent(runButtonPanel);
-        pane2.setOrientation(1);
+        pane2.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         pane2.setLeftComponent(pane1);
         pane2.setRightComponent(new JScrollPane(this.resultTextArea));
         this.panel.add(pane2);
@@ -65,7 +65,7 @@ public class PhpEvalCode implements Plugin {
                 Log.error(var3);
             }
         } else {
-            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", 1);
+            JOptionPane.showMessageDialog(this.panel, "Loaded", "提示", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -76,7 +76,7 @@ public class PhpEvalCode implements Plugin {
             String resultString = this.eval(code);
             this.resultTextArea.setText(resultString);
         } else {
-            JOptionPane.showMessageDialog(this.panel, "code is null", "提示", 2);
+            JOptionPane.showMessageDialog(this.panel, "code is null", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

@@ -95,16 +95,16 @@ public class MemoryShell implements Plugin {
                     byte[] result = this.payload.evalFunc(className, "run", reqParameter);
                     String resultString = this.encoding.Decoding(result);
                     Log.log(resultString);
-                    JOptionPane.showMessageDialog(this.panel, resultString, "提示", 1);
+                    JOptionPane.showMessageDialog(this.panel, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this.panel, "loader fail!", "提示", 2);
+                    JOptionPane.showMessageDialog(this.panel, "loader fail!", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this.panel, "password or secretKey or urlPattern is Null", "提示", 2);
+                JOptionPane.showMessageDialog(this.panel, "password or secretKey or urlPattern is Null", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception var13) {
             Log.error(var13);
-            JOptionPane.showMessageDialog(this.panel, var13.getMessage(), "提示", 2);
+            JOptionPane.showMessageDialog(this.panel, var13.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -119,16 +119,16 @@ public class MemoryShell implements Plugin {
                     unLoadServletMethod.setAccessible(true);
                     String resultString = (String) unLoadServletMethod.invoke(servletManagePlugin, urlPattern, urlPattern);
                     Log.log(resultString);
-                    JOptionPane.showMessageDialog(this.panel, resultString, "提示", 1);
+                    JOptionPane.showMessageDialog(this.panel, resultString, "提示", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception var6) {
                     Log.error(var6);
-                    JOptionPane.showMessageDialog(this.panel, var6.getMessage(), "提示", 2);
+                    JOptionPane.showMessageDialog(this.panel, var6.getMessage(), "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this.panel, "not find Plugin ServletManage", "提示", 2);
+                JOptionPane.showMessageDialog(this.panel, "not find Plugin ServletManage", "提示", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this.panel, "not input urlPattern", "提示", 2);
+            JOptionPane.showMessageDialog(this.panel, "not input urlPattern", "提示", JOptionPane.WARNING_MESSAGE);
         }
 
     }

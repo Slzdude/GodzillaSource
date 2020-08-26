@@ -50,7 +50,7 @@ public class BypassDisableFunctions implements Plugin {
         this.memSplitPane = new JSplitPane();
         this.commandTextField.setAutoscrolls(true);
         this.commandTextField.setText("whoami");
-        this.memSplitPane.setOrientation(0);
+        this.memSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         JPanel memTopPanel = new JPanel();
         memTopPanel.add(this.memPayloadLabel);
         memTopPanel.add(this.memPayloadComboBox);
