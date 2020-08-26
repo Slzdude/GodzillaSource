@@ -223,7 +223,7 @@ public class ShellDatabasePanel extends JPanel {
                     this.showData(rowsVector);
                     state = true;
                 } else {
-                    row = new Vector<String>();
+                    row = new Vector<>();
                     row.add("");
                     rowsVector.add(row);
                     this.dataView.getModel().setColumnIdentifiers(row);

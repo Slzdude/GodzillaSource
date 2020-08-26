@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.util.HashMap;
 
 public class ShellManage extends JFrame {
-    private static final HashMap<String, String> CN_HASH_MAP = new HashMap<String, String>();
+    private static final HashMap<String, String> CN_HASH_MAP = new HashMap<>();
 
     static {
         CN_HASH_MAP.put("MemoryShell", "内存SHELL");
@@ -50,7 +50,7 @@ public class ShellManage extends JFrame {
         this.tabbedPane = new JTabbedPane();
         String titleString = String.format("Url:%s 有效载荷:%s 加密器:%s", this.shellEntity.getUrl(), this.shellEntity.getPayload(), this.shellEntity.getCryption());
         this.setTitle(titleString);
-        boolean state = this.shellEntity.initShellOpertion();
+        boolean state = this.shellEntity.initShellOperation();
         if (state) {
             this.init();
         } else {
@@ -64,9 +64,8 @@ public class ShellManage extends JFrame {
     public static String getCNName(String name) {
 
         for (String o : CN_HASH_MAP.keySet()) {
-            String key = o;
-            if (key.toUpperCase().equals(name.toUpperCase())) {
-                return CN_HASH_MAP.get(key);
+            if (o.toUpperCase().equals(name.toUpperCase())) {
+                return CN_HASH_MAP.get(o);
             }
         }
 
@@ -102,12 +101,11 @@ public class ShellManage extends JFrame {
 
         for (Plugin value : plugins) {
             try {
-                Plugin plugin = value;
-                plugin.init(this.shellEntity);
-                this.tabbedPane.addTab(getCNName(this.getPluginName(plugin)), plugin.getView());
-                this.pluginMap.put(this.getPluginName(plugin), plugin);
-            } catch (Exception var5) {
-                Log.error(var5);
+                value.init(this.shellEntity);
+                this.tabbedPane.addTab(getCNName(this.getPluginName(value)), value.getView());
+                this.pluginMap.put(this.getPluginName(value), value);
+            } catch (Exception e) {
+                Log.error(e);
             }
         }
 

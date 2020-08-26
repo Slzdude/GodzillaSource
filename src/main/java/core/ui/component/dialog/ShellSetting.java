@@ -15,7 +15,6 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 
 public class ShellSetting extends JDialog {
@@ -275,7 +274,7 @@ public class ShellSetting extends JDialog {
         if (!updateTempShellEntity()) {
             JOptionPane.showMessageDialog(this, this.error, "提示", JOptionPane.WARNING_MESSAGE);
             this.error = null;
-        } else if (!this.shellContext.initShellOpertion()) {
+        } else if (!this.shellContext.initShellOperation()) {
             JOptionPane.showMessageDialog(this, "initShellOpertion Fail", "提示", JOptionPane.WARNING_MESSAGE);
         } else if (this.shellContext.getPayloadModel().test()) {
             JOptionPane.showMessageDialog(this, "Success!", "提示", JOptionPane.INFORMATION_MESSAGE);

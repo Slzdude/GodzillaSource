@@ -11,7 +11,6 @@ import util.functions;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -47,8 +46,8 @@ public class GenerateShellLoder extends JDialog {
         this.cryptionLabel = new JLabel("加密器");
         this.passwordTextField = new JTextField(16);
         this.secretKeyTextField = new JTextField(16);
-        this.payloadComboBox = new JComboBox<String>();
-        this.cryptionComboBox = new JComboBox<String>();
+        this.payloadComboBox = new JComboBox<>();
+        this.cryptionComboBox = new JComboBox<>();
         this.generateButton = new JButton("生成");
         this.cancelButton = new JButton("取消");
         this.passwordTextField.setText("pass");
@@ -80,40 +79,39 @@ public class GenerateShellLoder extends JDialog {
     private void generateButtonClick(ActionEvent actionEvent) {
         String password = this.passwordTextField.getText();
         String secretKey = this.secretKeyTextField.getText();
-        if (password != null && secretKey != null && password.trim().length() > 0 && secretKey.trim().length() > 0) {
-            if (this.payloadComboBox.getSelectedItem() != null && this.cryptionComboBox.getSelectedItem() != null) {
-                String selectedPayload = (String) this.payloadComboBox.getSelectedItem();
-                String selectedCryption = (String) this.cryptionComboBox.getSelectedItem();
-                Cryption cryption = ApplicationContext.getCryption(selectedPayload, selectedCryption);
-                byte[] data = cryption.generate(password, secretKey);
-                if (data != null) {
-                    JFileChooser chooser = new JFileChooser();
-                    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                    chooser.showDialog(new JLabel(), "选择");
-                    File selectdFile = chooser.getSelectedFile();
-                    if (selectdFile != null) {
-                        try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(selectdFile);
-                            fileOutputStream.write(data);
-                            fileOutputStream.close();
-                            JOptionPane.showMessageDialog(this, "success! save file to -> " + selectdFile.getAbsolutePath(), "提示", JOptionPane.INFORMATION_MESSAGE);
-                            this.dispose();
-                        } catch (Exception var11) {
-                            Log.error(var11);
-                        }
-                    } else {
-                        Log.log("用户取消选择....");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "加密器在生成时返回空", "提示", JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "payload 或  cryption 没有选中!", "提示", JOptionPane.WARNING_MESSAGE);
+        if (password == null || secretKey == null || password.trim().length() <= 0 || secretKey.trim().length() <= 0) {
+            JOptionPane.showMessageDialog(this, "password 或\t secretKey  是空的!", "提示", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (this.payloadComboBox.getSelectedItem() == null || this.cryptionComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "payload 或  cryption 没有选中!", "提示", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String selectedPayload = (String) this.payloadComboBox.getSelectedItem();
+        String selectedCryption = (String) this.cryptionComboBox.getSelectedItem();
+        Cryption cryption = ApplicationContext.getCryption(selectedPayload, selectedCryption);
+        byte[] data = cryption.generate(password, secretKey);
+        if (data == null) {
+            JOptionPane.showMessageDialog(this, "加密器在生成时返回空", "提示", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.showDialog(new JLabel(), "选择");
+        File selectedFile = chooser.getSelectedFile();
+        if (selectedFile != null) {
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(selectedFile);
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+                JOptionPane.showMessageDialog(this, "success! save file to -> " + selectedFile.getAbsolutePath(), "提示", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } catch (Exception var11) {
+                Log.error(var11);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "password 或\t secretKey  是空的!", "提示", JOptionPane.WARNING_MESSAGE);
+            Log.log("用户取消选择....");
         }
-
     }
 
     private void cancelButtonClick(ActionEvent actionEvent) {

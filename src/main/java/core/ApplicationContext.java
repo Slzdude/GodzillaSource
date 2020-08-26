@@ -123,7 +123,7 @@ public class ApplicationContext {
 
     private static void scanPluginJar() {
         String[] pluginJars = Db.getAllPlugin();
-        ArrayList<File> list = new ArrayList<File>();
+        ArrayList<File> list = new ArrayList<>();
 
         for (String pluginJar : pluginJars) {
             File jarFile = new File(pluginJar);
@@ -283,18 +283,16 @@ public class ApplicationContext {
 
     public static Cryption getCryption(String payloadName, String crytionName) {
         Class cryptionClass = cryptionMap.get(crytionName);
-        if (cryptionMap != null) {
-            CryptionAnnotation cryptionAnnotation = (CryptionAnnotation) cryptionClass.getAnnotation(CryptionAnnotation.class);
-            if (cryptionAnnotation.payloadName().equals(payloadName)) {
-                Cryption cryption;
+        CryptionAnnotation cryptionAnnotation = (CryptionAnnotation) cryptionClass.getAnnotation(CryptionAnnotation.class);
+        if (cryptionAnnotation.payloadName().equals(payloadName)) {
+            Cryption cryption;
 
-                try {
-                    cryption = (Cryption) cryptionClass.newInstance();
-                    return cryption;
-                } catch (Exception var6) {
-                    Log.error(var6);
-                    return null;
-                }
+            try {
+                cryption = (Cryption) cryptionClass.newInstance();
+                return cryption;
+            } catch (Exception var6) {
+                Log.error(var6);
+                return null;
             }
         }
 
@@ -344,8 +342,7 @@ public class ApplicationContext {
     }
 
     public static Http getHttp(ShellEntity shellEntity) {
-        Http httpx = new Http(shellEntity);
-        return httpx;
+        return new Http(shellEntity);
     }
 
     public static Font getFont() {

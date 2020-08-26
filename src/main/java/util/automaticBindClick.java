@@ -15,11 +15,10 @@ public class automaticBindClick {
     public static void bindButtonClick(final Object fieldClass, Object eventClass) {
         try {
             Field[] fields = fieldClass.getClass().getDeclaredFields();
-            Field[] var6 = fields;
             int var5 = fields.length;
 
             for (int var4 = 0; var4 < var5; ++var4) {
-                Field field = var6[var4];
+                Field field = fields[var4];
                 if (field.getType().isAssignableFrom(Button.class)) {
                     field.setAccessible(true);
                     Button fieldValue = (Button) field.get(fieldClass);
@@ -55,11 +54,10 @@ public class automaticBindClick {
     public static void bindJButtonClick(final Object fieldClass, Object eventClass) {
         try {
             Field[] fields = fieldClass.getClass().getDeclaredFields();
-            Field[] var6 = fields;
             int var5 = fields.length;
 
             for (int var4 = 0; var4 < var5; ++var4) {
-                Field field = var6[var4];
+                Field field = fields[var4];
                 if (field.getType().isAssignableFrom(JButton.class)) {
                     field.setAccessible(true);
                     JButton fieldValue = (JButton) field.get(fieldClass);

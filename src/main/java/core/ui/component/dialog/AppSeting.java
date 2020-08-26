@@ -56,14 +56,13 @@ public class AppSeting extends JDialog {
     }
 
     public static String[] getAllFontName() {
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<String> arrayList = new ArrayList<>();
         GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Font[] fonts = e.getAllFonts();
-        Font[] var6 = fonts;
         int var5 = fonts.length;
 
         for (int var4 = 0; var4 < var5; ++var4) {
-            Font font = var6[var4];
+            Font font = fonts[var4];
             arrayList.add(font.getFontName());
         }
 
@@ -73,11 +72,10 @@ public class AppSeting extends JDialog {
     public static String[] getAllFontType() {
         ArrayList<String> arrayList = new ArrayList<>();
         Field[] fields = Font.class.getDeclaredFields();
-        Field[] var5 = fields;
         int var4 = fields.length;
 
         for (int var3 = 0; var3 < var4; ++var3) {
-            Field field = var5[var3];
+            Field field = fields[var3];
             if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == (Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL)) {
                 arrayList.add(field.getName());
             }
@@ -87,7 +85,7 @@ public class AppSeting extends JDialog {
     }
 
     public static String[] getAllFontSize() {
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<String> arrayList = new ArrayList<>();
 
         for (int i = 8; i < 48; ++i) {
             arrayList.add(Integer.toString(i));
@@ -200,8 +198,7 @@ public class AppSeting extends JDialog {
             String fontName = (String) this.fontNameComboBox.getSelectedItem();
             String fontType = (String) this.fontTypeComboBox.getSelectedItem();
             int fontSize = Integer.parseInt((String) this.fontSizeComboBox.getSelectedItem());
-            Font font = new Font(fontName, Font.class.getDeclaredField(fontType).getInt(null), fontSize);
-            return font;
+            return new Font(fontName, Font.class.getDeclaredField(fontType).getInt(null), fontSize);
         } catch (Exception var5) {
             Log.error(var5);
             return null;
@@ -211,11 +208,10 @@ public class AppSeting extends JDialog {
     public String getFontType(int type) {
         try {
             Field[] fields = Font.class.getDeclaredFields();
-            Field[] var6 = fields;
             int var5 = fields.length;
 
             for (int var4 = 0; var4 < var5; ++var4) {
-                Field field = var6[var4];
+                Field field = fields[var4];
                 if (field.getType().isAssignableFrom(Integer.TYPE) && field.getName().indexOf("_") == -1 && field.getModifiers() == (Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL) && field.getInt(null) == type) {
                     return field.getName();
                 }

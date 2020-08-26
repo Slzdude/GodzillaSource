@@ -255,7 +255,7 @@ public class Db {
 
     public static String[] getAllPlugin() {
         String selectPlugin = "SELECT pluginJarFile FROM plugin";
-        ArrayList<String> pluginArrayList = new ArrayList<String>();
+        ArrayList<String> pluginArrayList = new ArrayList<>();
 
         try {
             Statement statement = getStatement();

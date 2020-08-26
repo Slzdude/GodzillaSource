@@ -91,8 +91,7 @@ public class PhpEvalCode implements Plugin {
             this.Load();
         }
 
-        String resultString = this.encoding.Decoding(this.payload.evalFunc("PHP_Eval_Code", "xxx", reqParameter));
-        return resultString;
+        return this.encoding.Decoding(this.payload.evalFunc("PHP_Eval_Code", "xxx", reqParameter));
     }
 
     public void init(ShellEntity shellEntity) {

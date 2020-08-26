@@ -20,7 +20,7 @@ public class ShellEntity {
     private String cryption = "";
     private String remark = "";
     private String encoding = "";
-    private Map<String, String> headers = new HashMap<String, String>();
+    private Map<String, String> headers = new HashMap<>();
     private String reqLeft = "";
     private String reqRight = "";
     private int connTimeout = 60000;
@@ -38,7 +38,7 @@ public class ShellEntity {
     public ShellEntity() {
     }
 
-    public boolean initShellOpertion() {
+    public boolean initShellOperation() {
         boolean state = false;
 
         try {
@@ -56,12 +56,10 @@ public class ShellEntity {
             } else {
                 Log.error("cryption Initialize Fail !");
             }
-
-            return state;
-        } catch (Exception var3) {
-            Log.error(var3);
-            return state;
+        } catch (Exception e) {
+            Log.error(e);
         }
+        return state;
     }
 
     public Http getHttp() {
@@ -209,7 +207,7 @@ public class ShellEntity {
     public void setHeader(String reqString) {
         if (reqString != null) {
             String[] reqLines = reqString.split("\n");
-            this.headers = new Hashtable<String, String>();
+            this.headers = new Hashtable<>();
 
             for (String reqLine : reqLines) {
                 if (!reqLine.trim().isEmpty()) {

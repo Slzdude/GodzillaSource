@@ -39,9 +39,8 @@ public class DataTree extends JTree {
     }
 
     public void DeleteNote(String fileString) {
-        DefaultMutableTreeNode defaultMutableTreeNode = this.rootNode;
         String[] paths = this.parseFile(fileString);
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) defaultMutableTreeNode.getPath()[0];
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.rootNode.getPath()[0];
         DefaultMutableTreeNode lasTreeNode = null;
 
         for (int i = 0; i < paths.length; ++i) {
@@ -81,9 +80,8 @@ public class DataTree extends JTree {
     }
 
     public void MoveNoteName(String fileString, String rename) {
-        DefaultMutableTreeNode defaultMutableTreeNode = this.rootNode;
         String[] paths = this.parseFile(fileString);
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) defaultMutableTreeNode.getPath()[0];
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.rootNode.getPath()[0];
 
         for (String path : paths) {
             node = this.FindTreeNote(node, path);
@@ -123,9 +121,8 @@ public class DataTree extends JTree {
 
     public void AddNote(String pathString) {
         if (!pathString.trim().isEmpty()) {
-            DefaultMutableTreeNode defaultMutableTreeNode = this.rootNode;
             String[] paths = this.parseFile(pathString);
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) defaultMutableTreeNode.getPath()[0];
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.rootNode.getPath()[0];
             DefaultMutableTreeNode lastTreeNode = node;
             boolean findSate = true;
 

@@ -46,8 +46,7 @@ public class PhpShell implements Payload {
     public byte[] downloadFile(String fileName) {
         ReqParameter parameter = new ReqParameter();
         parameter.add("fileName", this.encoding.Encoding(fileName));
-        byte[] result = this.evalFunc(null, "readFileContent", parameter);
-        return result;
+        return this.evalFunc(null, "readFileContent", parameter);
     }
 
     public String getBasicsInfo() {

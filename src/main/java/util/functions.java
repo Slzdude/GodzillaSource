@@ -89,8 +89,7 @@ public class functions {
     }
 
     public static byte[] intToBytes(int value) {
-        byte[] src = new byte[]{(byte) (value & 255), (byte) (value >> 8 & 255), (byte) (value >> 16 & 255), (byte) (value >> 24 & 255)};
-        return src;
+        return new byte[]{(byte) (value & 255), (byte) (value >> 8 & 255), (byte) (value >> 16 & 255), (byte) (value >> 24 & 255)};
     }
 
     public static String byteArrayToHex(byte[] bytes) {

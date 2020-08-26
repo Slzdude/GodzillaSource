@@ -3,7 +3,7 @@ package core.ui.model;
 import java.util.HashMap;
 
 public class DatabaseSql {
-    public static HashMap<String, String> sqlMap = new HashMap<String, String>();
+    public static HashMap<String, String> sqlMap = new HashMap<>();
 
     static {
         sqlMap.put("mysql-getAllDatabase", "SHOW DATABASES;");

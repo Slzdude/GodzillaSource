@@ -92,7 +92,7 @@ public class ShellFileManager extends JPanel {
         this.filelJscrollPane.setViewportView(this.fileDataTree);
         this.filePanel.add(this.filelJscrollPane);
         this.fileOpertionPanel = new JPanel(new CardLayout());
-        this.dateViewColumnVector = new Vector<String>();
+        this.dateViewColumnVector = new Vector<>();
         this.dateViewColumnVector.add("icon");
         this.dateViewColumnVector.add("name");
         this.dateViewColumnVector.add("type");
@@ -315,9 +315,9 @@ public class ShellFileManager extends JPanel {
     private Vector<Vector<java.io.Serializable>> getAllFile(String filePathString) {
         String fileDataString = this.payload.getFile(functions.formatDir(filePathString));
         String[] rowStrings = fileDataString.split("\n");
-        Vector<Vector<java.io.Serializable>> rows = new Vector<Vector<java.io.Serializable>>();
+        Vector<Vector<java.io.Serializable>> rows = new Vector<>();
         if (rowStrings[0].equals("ok")) {
-            rows = new Vector<Vector<java.io.Serializable>>();
+            rows = new Vector<>();
             this.fileDataTree.AddNote(rowStrings[1]);
             this.currentDir = functions.formatDir(rowStrings[1]);
             this.dirField.setText(functions.formatDir(rowStrings[1]));

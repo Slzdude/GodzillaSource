@@ -132,11 +132,10 @@ public class DataView extends JTable {
             rowVector.add("NULL");
         }
 
-        Field[] var12 = fields;
         int var11 = fields.length;
 
         for (int var10 = 0; var10 < var11; ++var10) {
-            Field field = var12[var10];
+            Field field = fields[var10];
             field_name = field.getName();
             int find_id = Arrays.binarySearch(columns, field_name.substring(2).toUpperCase());
             if (field_name.startsWith("s_") && find_id != -1) {
@@ -181,11 +180,10 @@ public class DataView extends JTable {
             columns[i] = tableModel.getColumnName(i).toUpperCase();
         }
 
-        Field[] var13 = fields;
         int var12 = fields.length;
 
         for (int var11 = 0; var11 < var12; ++var11) {
-            Field field = var13[var11];
+            Field field = fields[var11];
             field_name = field.getName();
             int find_id = Arrays.binarySearch(columns, field_name.substring(2).toUpperCase());
             if (field_name.startsWith("s_") && find_id != -1) {

@@ -21,7 +21,7 @@ public class PluginManage extends JDialog {
     private final JButton removeButton = new JButton("移除");
     private final JButton cancelButton = new JButton("取消");
     private final JButton refreshButton = new JButton("刷新");
-    private final Vector<String> columnVector = new Vector<String>();
+    private final Vector<String> columnVector = new Vector<>();
     private final JSplitPane splitPane = new JSplitPane();
 
     public PluginManage() {
@@ -52,7 +52,7 @@ public class PluginManage extends JDialog {
 
     private void refreshPluginView() {
         String[] pluginStrings = Db.getAllPlugin();
-        Vector<Vector<String>> rows = new Vector<Vector<String>>();
+        Vector<Vector<String>> rows = new Vector<>();
 
         for (String string : pluginStrings) {
             Vector<String> rowVector = new Vector<>();
